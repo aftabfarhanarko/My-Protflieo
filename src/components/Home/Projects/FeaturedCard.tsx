@@ -52,8 +52,8 @@ export default function FeaturedCard({ project }: { project: Project }) {
           className="w-full h-full object-cover object-center scale-[1.05] transition-all duration-[1200ms] ease-out brightness-[0.18] blur-[12px] opacity-80 group-hover:brightness-[0.22] group-hover:scale-[1.08]"
         />
         {/* Deep rich gradient overlays for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-transparent z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-transparent to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#06070a]/95 via-[#0f1422]/90 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#06070a]/95 via-transparent to-transparent z-10" />
       </div>
 
       {/* Grid texture overlay */}

@@ -160,7 +160,7 @@ export default function Navbar() {
   return (
     <>
       <motion.header
-        className="fixed top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 md:top-5 md:left-6 md:right-6 lg:left-8 lg:right-8 z-50 rounded-2xl"
+        className="fixed top-3 sm:top-4 md:top-5 left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] md:w-[calc(100%-3rem)] max-w-7xl z-50 rounded-2xl"
         style={{
           backdropFilter: "blur(12px)",        // ✅ 12px mobile-friendly (20px was heavy)
           WebkitBackdropFilter: "blur(12px)",

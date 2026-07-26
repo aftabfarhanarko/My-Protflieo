@@ -102,7 +102,7 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer
-      className="footer-responsive border-t border-border bg-card/40 px-4 sm:px-6 lg:px-8 pt-10 mt-2"
+      className="footer-responsive border-t border-slate-800/90 bg-slate-900/80 backdrop-blur-xl px-4 sm:px-6 lg:px-8 pt-10 mt-6"
       style={{
         paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 80px)",
       }}
@@ -120,13 +120,13 @@ export default function Footer() {
           <div>
             <Link
               href="/"
-              className="text-xl font-black tracking-tight text-foreground"
+              className="text-xl font-black tracking-tight text-white"
               style={{ fontFamily: "'Syne', sans-serif" }}
             >
               Aftab Farhan Arko
             </Link>
-            <p className="text-[11.5px] text-foreground/45 mt-1.5 max-w-[220px] leading-relaxed font-mono mx-auto sm:mx-0">
-              Junior Full Stack Developer • Building Modern Web Applications
+            <p className="text-xs text-slate-300 mt-1.5 max-w-[240px] leading-relaxed font-sans mx-auto sm:mx-0">
+              Full Stack Software Developer • Building Modern Web Applications
             </p>
           </div>
 
@@ -141,7 +141,7 @@ export default function Footer() {
                   href.startsWith("mailto") ? undefined : "noopener noreferrer"
                 }
                 aria-label={label}
-                className={`w-9 h-9 rounded-[10px] bg-card/50 border border-border flex items-center justify-center text-foreground/55 hover:-translate-y-0.5 transition-all duration-200 ${colorClass}`}
+                className={`w-9 h-9 rounded-[10px] bg-slate-950/80 border border-slate-800 flex items-center justify-center text-slate-300 hover:-translate-y-0.5 transition-all duration-200 ${colorClass}`}
               >
                 {imageSrc ? (
                   <img
@@ -158,12 +158,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom row — stacks & centers on mobile */}
-        <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-between pt-6 border-t border-border">
-          <p className="text-[11px] text-foreground/35 font-mono text-center sm:text-left">
+        <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-between pt-6 border-t border-slate-800/80">
+          <p className="text-xs text-slate-400 font-sans text-center sm:text-left font-medium">
             © {currentYear} Aftab Farhan Arko. All rights reserved.
           </p>
-          <p className="text-[11px] text-foreground/20 font-mono text-center sm:text-right">
-            Built with Next.js, TypeScript, PostgreSQL, Prisma, Framer Motion
+          <p className="text-xs text-slate-400 font-sans text-center sm:text-right font-medium">
+            Built with Next.js 16, TypeScript, PostgreSQL, Prisma, Framer Motion
           </p>
         </div>
       </motion.div>

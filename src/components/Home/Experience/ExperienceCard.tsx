@@ -58,10 +58,10 @@ export default function ExperienceCard({ exp }: ExperienceCardProps) {
           borderColor: "rgba(255, 255, 255, 0.12)",
           boxShadow: `0 25px 50px -12px ${glowColor}`,
         }}
-        className={`rounded-[2rem] border overflow-hidden transition-all duration-300 relative bg-[#0E0E10]/85 backdrop-blur-xl ${
+        className={`rounded-[2rem] border overflow-hidden transition-all duration-300 relative bg-slate-900/80 backdrop-blur-xl card-3d ${
           exp.type === "current"
-            ? "border-blue-500/20"
-            : "border-white/[0.06]"
+            ? "border-emerald-500/40 shadow-[0_0_25px_rgba(16,185,129,0.1)]"
+            : "border-slate-800/90"
         }`}
       >
         {/* Spotlight */}
