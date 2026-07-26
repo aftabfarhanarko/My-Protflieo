@@ -26,10 +26,10 @@ const Github = ({ className = "w-4 h-4" }: { className?: string }) => (
   </svg>
 );
 
+import { useRouter } from "next/navigation";
+
 export default function ProjectCard({ project }: { project: Project }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalData, setModalData] = useState<Project | null>(null);
-  const [isModalLoading, setIsModalLoading] = useState(false);
+  const router = useRouter();
 
   const badge =
     categoryBadge[project.category] ??
@@ -53,26 +53,11 @@ export default function ProjectCard({ project }: { project: Project }) {
     setSpotlight((s) => ({ ...s, opacity: 0 }));
   };
 
-  const handleOpenDetails = async () => {
-    setIsModalOpen(true);
-    setIsModalLoading(true);
-    try {
-      const res = await fetch(`/api/projects/${project.id}`);
-      if (res.ok) {
-        const data = await res.json();
-        setModalData(data);
-      } else {
-        setModalData(project);
-      }
-    } catch (error) {
-      console.error("Error loading project details:", error);
-      setModalData(project);
-    } finally {
-      setIsModalLoading(false);
-    }
+  const handleOpenDetails = () => {
+    router.push(`/projects/${project.id}`);
   };
 
-  const displayProject = modalData || project;
+  const displayProject = project;
 
   return (
     <>
@@ -81,11 +66,11 @@ export default function ProjectCard({ project }: { project: Project }) {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onClick={handleOpenDetails}
-        className="group relative flex flex-col rounded-2xl border border-border bg-card/30 hover:border-foreground/[0.18] transition-all duration-300 overflow-hidden shadow-sm hover:shadow-xl backdrop-blur-md cursor-pointer"
+        className="group relative flex flex-col rounded-[2rem] border border-slate-800/90 bg-slate-900/80 hover:border-white/30 transition-all duration-300 overflow-hidden shadow-xl hover:shadow-2xl backdrop-blur-xl cursor-pointer card-3d"
       >
         {/* Spotlight overlay */}
         <div
-          className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300 rounded-2xl"
+          className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300 rounded-[2rem]"
           style={{
             opacity: spotlight.opacity,
             background: `radial-gradient(280px circle at ${spotlight.x}% ${spotlight.y}%, ${glow}, transparent 70%)`,
@@ -94,50 +79,59 @@ export default function ProjectCard({ project }: { project: Project }) {
 
         {/* Category glow border */}
         <div
-          className="pointer-events-none absolute inset-0 z-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          className="pointer-events-none absolute inset-0 z-0 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           style={{
             background: `radial-gradient(ellipse at 50% 0%, ${glow} 0%, transparent 60%)`,
           }}
         />
 
-        {/* Thumbnail */}
-        <div className="relative aspect-[4/3] overflow-hidden bg-black/10">
+        {/* MacOS Window Top Header Bar */}
+        <div className="px-4 py-2 bg-slate-950 border-b border-slate-800/90 flex items-center justify-between z-20">
+          <div className="flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+          </div>
+
+          {/* Category Pill */}
+          <span className="px-2.5 py-0.5 text-[9px] font-extrabold text-slate-300 bg-slate-900 border border-slate-800 rounded-full flex items-center gap-1 shadow-sm">
+            <Layers className="w-3 h-3 text-slate-400 shrink-0" />
+            {categoryLabel[project.category] || project.category}
+          </span>
+        </div>
+
+        {/* Thumbnail Screen */}
+        <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
           <img
             src={project.image}
             alt={project.title}
-            className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.04] transition-all duration-700 ease-out contrast-[1.01]"
+            className="w-full h-full object-cover object-top opacity-95 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
           />
 
-          {/* Top badges */}
-          <div className="absolute top-3 left-3 right-3 flex flex-wrap items-center gap-1.5 z-10">
-            {/* Category Pill */}
-            <span className="px-2.5 py-1 text-[9px] font-bold text-white/85 bg-black/65 backdrop-blur-md border border-white/10 rounded-full flex items-center gap-1 shadow-sm">
-              <Layers className="w-3 h-3 text-white/40 shrink-0" />
-              {categoryLabel[project.category] || project.category}
-            </span>
-
+          {/* Floating Badges */}
+          <div className="absolute top-3 left-3 right-3 flex flex-wrap items-center gap-1.5 z-10 pointer-events-none">
             {/* Project Type / Client Pill */}
             {project.projectType === "CLIENT" ? (
-              <span className="px-2.5 py-1 text-[9px] font-bold text-white/85 bg-black/65 backdrop-blur-md border border-white/10 rounded-full flex items-center gap-1 shadow-sm">
-                <Briefcase className="w-3 h-3 text-white/40 shrink-0" />
-                {project.client || "Client Project"}
+              <span className="px-2.5 py-1 text-[9px] font-bold text-amber-300 bg-slate-950/85 backdrop-blur-md border border-amber-500/30 rounded-full flex items-center gap-1 shadow-md">
+                <Briefcase className="w-3 h-3 text-amber-400 shrink-0" />
+                Client Project
               </span>
             ) : project.projectType === "TEAM" ? (
-              <span className="px-2.5 py-1 text-[9px] font-bold text-white/85 bg-black/65 backdrop-blur-md border border-white/10 rounded-full flex items-center gap-1 shadow-sm">
-                <Users className="w-3 h-3 text-white/40 shrink-0" />
+              <span className="px-2.5 py-1 text-[9px] font-bold text-white bg-slate-950/80 backdrop-blur-md border border-slate-800 rounded-full flex items-center gap-1 shadow-md">
+                <Users className="w-3 h-3 text-slate-400 shrink-0" />
                 Team Project
               </span>
             ) : (
-              <span className="px-2.5 py-1 text-[9px] font-bold text-white/85 bg-black/65 backdrop-blur-md border border-white/10 rounded-full flex items-center gap-1 shadow-sm">
-                <User className="w-3 h-3 text-white/40 shrink-0" />
+              <span className="px-2.5 py-1 text-[9px] font-bold text-white bg-slate-950/80 backdrop-blur-md border border-slate-800 rounded-full flex items-center gap-1 shadow-md">
+                <User className="w-3 h-3 text-slate-400 shrink-0" />
                 Personal Project
               </span>
             )}
 
             {/* Year Pill */}
             {project.year && (
-              <span className="px-2.5 py-1 text-[9px] font-bold text-white/85 bg-black/65 backdrop-blur-md border border-white/10 rounded-full flex items-center gap-1 shadow-sm ml-auto">
-                <Calendar className="w-3 h-3 text-white/40 shrink-0" />
+              <span className="px-2.5 py-1 text-[9px] font-bold text-white bg-slate-950/80 backdrop-blur-md border border-slate-800 rounded-full flex items-center gap-1 shadow-md ml-auto">
+                <Calendar className="w-3 h-3 text-slate-400 shrink-0" />
                 {project.year}
               </span>
             )}
@@ -146,72 +140,67 @@ export default function ProjectCard({ project }: { project: Project }) {
           {/* Hover quick-actions */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10"
+            className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px] flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10"
           >
             <a
               href={project.demoLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-4 py-2 bg-white text-black text-xs font-bold rounded-xl shadow-2xl hover:bg-white/90 transition-all active:scale-95 hover:shadow-white/20 hover:shadow-lg"
+              className="flex items-center gap-1.5 px-4 py-2 bg-white text-black text-xs font-bold rounded-xl shadow-xl hover:bg-slate-200 transition-all active:scale-95"
             >
-              <ExternalLink className="w-3 h-3" /> Live
+              <ExternalLink className="w-3.5 h-3.5" /> Live
             </a>
             {project.githubLink && (
               <a
                 href={project.githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-4 py-2 bg-black/60 text-white text-xs font-bold rounded-xl border border-white/20 backdrop-blur-sm hover:bg-black/50 transition-all active:scale-95"
+                className="flex items-center gap-1.5 px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-xl border border-slate-700 backdrop-blur-sm hover:bg-slate-800 transition-all active:scale-95"
               >
-                <Github className="w-3 h-3 text-white" /> Code
+                <Github className="w-3.5 h-3.5 text-white" /> Code
               </a>
             )}
           </div>
-
-          {/* Bottom accent line */}
-          <div
-            className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${accentBar} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-          />
         </div>
 
         {/* Body */}
-        <div className="relative z-10 flex flex-col flex-1 p-4 sm:p-5">
-          {/* Accent gradient line */}
-          <div
-            className={`h-px w-full bg-gradient-to-r ${accentBar} mb-4 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300`}
-          />
-
+        <div className="relative z-10 flex flex-col flex-1 p-5 sm:p-6">
           <div className="flex items-start justify-between gap-2 mb-1.5">
-            <h4 className="text-sm sm:text-[15px] font-bold text-foreground/90 leading-snug group-hover:text-foreground transition-colors duration-200">
+            <h4 className="text-base sm:text-lg font-extrabold text-white leading-snug group-hover:text-white transition-colors duration-200">
               {project.title}
             </h4>
-            <ArrowUpRight className="w-4 h-4 text-foreground/20 group-hover:text-foreground/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0 mt-0.5" />
+            <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0 mt-1" />
           </div>
 
-          <p className="text-[10px] font-bold text-foreground/30 mb-2.5 uppercase tracking-wider">
+          <p className="text-xs font-bold text-slate-300 mb-3 uppercase tracking-wider">
             {project.tagline}
-            {project.projectType === "CLIENT" 
-              ? ` · ${project.client || "Client Project"}` 
-              : project.projectType === "TEAM" 
-              ? " · Team Project" 
-              : ""}
           </p>
 
-          <p className="text-[12px] text-foreground/45 leading-relaxed mb-4 line-clamp-2 flex-1">
+          <p className="text-xs text-slate-200 leading-relaxed mb-4 font-medium line-clamp-2 flex-1">
             {project.description}
           </p>
 
-          {/* Tech pills - Shows all technologies */}
+          {/* Curated Tech Stack Pills (Top 5 for clean aesthetics) */}
           <div className="flex flex-wrap gap-1.5 mb-5">
-            {project.tech.map((t) => (
-              <TechPill key={t} label={t} />
+            {project.tech.slice(0, 5).map((t) => (
+              <span
+                key={t}
+                className="px-2.5 py-1 text-[11px] font-bold bg-slate-950 border border-slate-800 rounded-lg text-slate-300 shadow-sm"
+              >
+                {t}
+              </span>
             ))}
+            {project.tech.length > 5 && (
+              <span className="px-2 py-1 text-[10px] font-bold text-slate-400 bg-slate-950/60 border border-slate-800 rounded-lg">
+                +{project.tech.length - 5}
+              </span>
+            )}
           </div>
 
           {/* Actions */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className="flex gap-2 flex-wrap items-center mt-auto"
+            className="flex gap-2 flex-wrap items-center mt-auto pt-3 border-t border-slate-800/80"
           >
             <ActionBtn
               href={project.demoLink}
@@ -230,7 +219,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             )}
             <button
               onClick={handleOpenDetails}
-              className="inline-flex items-center gap-1.5 font-semibold transition-all duration-200 active:scale-95 px-3.5 py-2 text-[11px] rounded-xl border border-border/70 text-foreground/55 hover:border-foreground/25 hover:text-foreground/80 bg-card/40 hover:bg-card/60 backdrop-blur-sm cursor-pointer ml-auto"
+              className="inline-flex items-center gap-1.5 font-bold transition-all duration-200 active:scale-95 px-3.5 py-2 text-xs rounded-xl border border-slate-700 text-white bg-slate-800 hover:bg-slate-700 shadow-sm cursor-pointer ml-auto"
               type="button"
             >
               <Info className="w-3.5 h-3.5" />
@@ -239,164 +228,6 @@ export default function ProjectCard({ project }: { project: Project }) {
           </div>
         </div>
       </div>
-
-      {/* Premium Project Details Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md transition-all duration-300">
-          <div className="relative w-full max-w-2xl bg-card border border-border rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[85vh] transition-all duration-300">
-            {/* Header / Top Image section */}
-            <div className="relative aspect-[16/9] w-full overflow-hidden bg-black/10 shrink-0 border-b border-border/40">
-              <img
-                src={displayProject.image}
-                alt={displayProject.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-              
-              {/* Close Button */}
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-black/60 border border-white/10 text-white/70 hover:text-white hover:bg-black/80 transition-all cursor-pointer z-20"
-                type="button"
-              >
-                <X className="w-4 h-4" />
-              </button>
-
-              {/* Title & Category Badge */}
-              <div className="absolute bottom-4 left-6 right-6 z-10">
-                <div className="flex flex-wrap items-center gap-2 mb-2">
-                  <span className={`px-2.5 py-1 text-[9px] font-black uppercase tracking-widest border rounded-lg backdrop-blur-sm ${badge}`}>
-                    {categoryLabel[displayProject.category] || displayProject.category}
-                  </span>
-                  {displayProject.projectType === "CLIENT" ? (
-                    <span className="px-2.5 py-1 text-[9px] font-black uppercase tracking-widest bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 rounded-lg backdrop-blur-sm flex items-center gap-1.5 shadow-sm">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      {displayProject.client || "Client Project"}
-                    </span>
-                  ) : displayProject.projectType === "TEAM" ? (
-                    <span className="px-2.5 py-1 text-[9px] font-black uppercase tracking-widest bg-sky-500/15 border border-sky-500/40 text-sky-400 rounded-lg backdrop-blur-sm flex items-center gap-1.5 shadow-sm">
-                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-                      Team Project
-                    </span>
-                  ) : (
-                    <span className="px-2.5 py-1 text-[9px] font-black uppercase tracking-widest bg-amber-500/15 border border-amber-500/40 text-amber-400 rounded-lg backdrop-blur-sm flex items-center gap-1.5 shadow-sm">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-                      Personal Project
-                    </span>
-                  )}
-                </div>
-                <h3 className="text-xl sm:text-2xl font-black text-foreground tracking-tight leading-none">
-                  {displayProject.title}
-                </h3>
-              </div>
-            </div>
-
-            {/* Modal Body / Scrollable Content */}
-            {isModalLoading ? (
-              <div className="flex flex-col items-center justify-center py-20 space-y-4 flex-1 bg-card">
-                <Loader2 className="w-8 h-8 animate-spin text-foreground/45" />
-                <p className="text-[10px] font-black text-foreground/40 uppercase tracking-widest animate-pulse">
-                  Fetching details...
-                </p>
-              </div>
-            ) : (
-              <div className="p-6 overflow-y-auto space-y-6 flex-1">
-                {/* Premium Meta Info Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 border-b border-border/40 pb-6">
-                  <div className="flex flex-col gap-1.5 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.04] backdrop-blur-sm">
-                    <span className="text-[9px] font-bold text-foreground/40 uppercase tracking-wider flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5 text-foreground/50" /> Timeline
-                    </span>
-                    <span className="text-xs font-semibold text-foreground/80">
-                      {displayProject.startDate && displayProject.endDate
-                        ? `${displayProject.startDate} - ${displayProject.endDate}`
-                        : displayProject.year || "N/A"}
-                    </span>
-                  </div>
-                  <div className="flex flex-col gap-1.5 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.04] backdrop-blur-sm">
-                    <span className="text-[9px] font-bold text-foreground/40 uppercase tracking-wider flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-foreground/50" /> Duration
-                    </span>
-                    <span className="text-xs font-semibold text-foreground/80">
-                      {displayProject.duration || "N/A"}
-                    </span>
-                  </div>
-                  <div className="flex flex-col gap-1.5 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.04] backdrop-blur-sm">
-                    <span className="text-[9px] font-bold text-foreground/40 uppercase tracking-wider flex items-center gap-1.5">
-                      <User className="w-3.5 h-3.5 text-foreground/50" /> Client
-                    </span>
-                    <span className="text-xs font-semibold text-foreground/80 truncate" title={displayProject.projectType === "CLIENT" ? (displayProject.client || "Client Project") : displayProject.projectType === "TEAM" ? "Team Project" : "Personal"}>
-                      {displayProject.projectType === "CLIENT" ? (displayProject.client || "Client Project") : displayProject.projectType === "TEAM" ? "Team Project" : "Personal"}
-                    </span>
-                  </div>
-                  <div className="flex flex-col gap-1.5 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.04] backdrop-blur-sm">
-                    <span className="text-[9px] font-bold text-foreground/40 uppercase tracking-wider flex items-center gap-1.5">
-                      <Layers className="w-3.5 h-3.5 text-foreground/50" /> Project Type
-                    </span>
-                    <span className="text-xs font-semibold text-foreground/80">
-                      {displayProject.projectType === "CLIENT" ? "Client Work" : displayProject.projectType === "TEAM" ? "Team Work" : "Personal Work"}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Tagline & Description */}
-                <div className="space-y-2">
-                  <h4 className="text-[10px] font-black text-foreground/35 uppercase tracking-widest">
-                    About Project
-                  </h4>
-                  <p className="text-xs sm:text-sm font-bold text-foreground/85 leading-relaxed">
-                    {displayProject.tagline}
-                  </p>
-                  <p className="text-xs sm:text-sm text-foreground/60 leading-relaxed whitespace-pre-line">
-                    {displayProject.description}
-                  </p>
-                </div>
-
-                {/* Technologies */}
-                <div className="space-y-3">
-                  <h4 className="text-[10px] font-black text-foreground/35 uppercase tracking-widest">
-                    Technologies Used
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {displayProject.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider bg-card/60 border border-border rounded-xl text-foreground/75 backdrop-blur-sm shadow-sm"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Footer / Call To Actions */}
-            <div className="p-5 border-t border-border/40 bg-card/20 flex gap-3 shrink-0">
-              <a
-                href={displayProject.demoLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-foreground text-background font-bold text-xs rounded-xl shadow-lg hover:bg-foreground/90 transition-all active:scale-[0.98]"
-              >
-                <ExternalLink className="w-4 h-4" />
-                Visit Website
-              </a>
-              {displayProject.githubLink && (
-                <a
-                  href={displayProject.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 border border-border/80 bg-card hover:bg-card/60 text-foreground/80 hover:text-foreground font-bold text-xs rounded-xl transition-all active:scale-[0.98]"
-                >
-                  <Github className="w-4 h-4" />
-                  Source Code
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }

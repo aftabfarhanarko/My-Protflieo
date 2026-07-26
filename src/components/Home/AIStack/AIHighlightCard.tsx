@@ -29,10 +29,10 @@ export default function AIHighlightCard({ selectedAIInfo }: AIHighlightCardProps
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.98 }}
           transition={{ duration: 0.25 }}
-          className="relative p-6 rounded-3xl border bg-[#111114] flex flex-col h-full justify-between min-h-[360px] sm:min-h-[380px]"
+          className="relative p-6 rounded-3xl border bg-slate-900/90 backdrop-blur-xl flex flex-col h-full justify-between min-h-[320px] sm:min-h-[340px] shadow-2xl card-3d"
           style={{
             borderColor: selectedAIInfo.color,
-            boxShadow: `0 16px 32px -16px ${selectedAIInfo.color}33`,
+            boxShadow: `0 20px 40px -15px ${selectedAIInfo.color}40`,
           }}
         >
           <div>

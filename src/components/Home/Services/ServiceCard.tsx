@@ -53,7 +53,7 @@ export default function DevOpsWorkflow() {
   }, []);
 
   return (
-    <div className="relative mb-12 p-6 sm:p-8 rounded-[2rem] bg-[#0E0E10]/95 border border-white/[0.06] overflow-hidden">
+    <div className="relative mb-12 p-6 sm:p-8 rounded-[2rem] bg-slate-900/80 border border-slate-800/90 backdrop-blur-xl overflow-hidden shadow-xl card-3d">
       {/* Ambient background glow that shifts with the active stage */}
       <motion.div
         className="absolute -top-24 left-1/2 -translate-x-1/2 w-[420px] h-[420px] rounded-full blur-3xl pointer-events-none"
@@ -63,14 +63,14 @@ export default function DevOpsWorkflow() {
 
       {/* Header */}
       <div className="relative z-10 flex items-center gap-3 mb-8 sm:mb-10">
-        <div className="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0">
-          <Workflow size={16} className="text-white/60" />
+        <div className="w-10 h-10 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0 shadow-inner">
+          <Workflow size={18} className="text-white" />
         </div>
         <div>
-          <p className="text-sm font-bold text-white uppercase tracking-wider">
+          <p className="text-base font-bold text-white uppercase tracking-wider">
             Deployment Workflow
           </p>
-          <p className="text-[11px] text-white/40 font-medium">
+          <p className="text-xs text-slate-300 font-medium">
             How I ship code to production, end to end
           </p>
         </div>

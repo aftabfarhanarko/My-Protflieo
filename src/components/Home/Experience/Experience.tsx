@@ -65,7 +65,7 @@ export default function Experience() {
           {/* Mini stats */}
           <div className="grid grid-cols-2 gap-3 mb-8">
             {[
-              { v: "1.5+", l: "Years Exp." },
+              { v: "2+", l: "Years Exp." },
               { v: "10+", l: "Projects" },
               { v: "7+", l: "Clients" },
               { v: "12+", l: "Tech Stack" },

@@ -59,7 +59,7 @@ export default function AIPipeline({
   }, [isPlayingWorkflow, activeStep, handleStepClick]);
 
   return (
-    <div className="mt-12 sm:mt-16 border border-white/[0.06] rounded-[2.5rem] bg-[#0A0A0F]/60 backdrop-blur-md p-6 sm:p-8 relative overflow-hidden">
+    <div className="mt-12 sm:mt-16 border border-slate-800/90 rounded-[2.5rem] bg-slate-900/80 backdrop-blur-xl p-6 sm:p-8 relative overflow-hidden shadow-2xl card-3d">
       {/* Background soft ambient lights */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-violet-600/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />

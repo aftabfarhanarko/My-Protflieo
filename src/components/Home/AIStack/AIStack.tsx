@@ -41,7 +41,7 @@ export default function AIStack() {
   return (
     <section
       id="ai-stack"
-      className="relative mb-16 sm:mb-20 lg:mb-24 scroll-mt-24 px-4 sm:px-6 lg:px-0 bg-[#08080A] rounded-[2.5rem] lg:bg-transparent lg:rounded-none py-10 lg:py-0"
+      className="relative mb-16 sm:mb-20 lg:mb-24 scroll-mt-24 px-4 sm:px-6 lg:px-0 bg-transparent py-6 lg:py-0"
     >
       {/* Title */}
       <motion.div

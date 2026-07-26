@@ -58,38 +58,38 @@ function ContactCardItem({ item }: { item: { icon: React.ReactNode; label: strin
         transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
       }}
       whileHover={{
-        borderColor: "rgba(255, 255, 255, 0.12)",
-        boxShadow: "0 15px 30px -10px rgba(255, 255, 255, 0.06)",
+        borderColor: "rgba(255, 255, 255, 0.3)",
+        boxShadow: "0 15px 30px -10px rgba(255, 255, 255, 0.08)",
         x: 4,
       }}
-      className="flex items-center gap-4 px-4 py-4.5 rounded-[1.5rem] border border-white/[0.06] bg-[#0E0E10]/85 backdrop-blur-xl transition-all duration-300 relative group overflow-hidden"
+      className="flex items-center gap-4 px-4 py-4 rounded-[1.5rem] border border-slate-800/90 bg-slate-900/80 backdrop-blur-xl transition-all duration-300 relative group overflow-hidden shadow-xl card-3d"
     >
       {/* Spotlight */}
       {spotlight.show && (
         <div
           className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
           style={{
-            background: `radial-gradient(150px circle at ${spotlight.x}px ${spotlight.y}px, rgba(255,255,255,0.04), transparent 80%)`,
+            background: `radial-gradient(150px circle at ${spotlight.x}px ${spotlight.y}px, rgba(255,255,255,0.08), transparent 80%)`,
           }}
         />
       )}
 
       {/* Sweep Glare Shine */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-[1200ms] ease-out pointer-events-none" />
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-[1200ms] ease-out pointer-events-none" />
 
       {/* Spring rotation/scale on icon wrapper */}
       <motion.div 
         whileHover={{ rotate: 360, scale: 1.1 }}
         transition={{ type: "spring", stiffness: 200, damping: 12 }}
-        className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.08] shadow-inner flex items-center justify-center text-white/60 group-hover:text-white transition-colors shrink-0"
+        className="w-11 h-11 rounded-2xl bg-slate-950 border border-slate-800 shadow-inner flex items-center justify-center text-slate-300 group-hover:text-white transition-colors shrink-0"
         style={{ transform: "translateZ(20px)" }}
       >
         {item.icon}
       </motion.div>
 
       <div className="min-w-0" style={{ transform: "translateZ(15px)" }}>
-        <p className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1 font-mono">{item.label}</p>
-        <p className="text-sm font-bold text-white/70 group-hover:text-white truncate transition-colors">{item.value}</p>
+        <p className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-0.5 font-mono">{item.label}</p>
+        <p className="text-sm font-bold text-white group-hover:text-white truncate transition-colors">{item.value}</p>
       </div>
     </motion.a>
   );
@@ -99,28 +99,28 @@ export default function ContactInfo() {
   return (
     <motion.div variants={fadeUp} className="lg:col-span-2 flex flex-col gap-4">
       {/* Opportunities Badge */}
-      <div className="flex items-center gap-3 px-4 py-3.5 rounded-2xl border border-green-500/20 bg-green-500/5 select-none">
+      <div className="flex items-center gap-3 px-4 py-3.5 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 select-none shadow-sm">
         <span className="relative flex h-2.5 w-2.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-60" />
-          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400" />
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
         </span>
-        <span className="text-sm text-green-300/80 font-mono">
-          open_to_opportunities=<span className="text-green-400">true</span>
+        <span className="text-xs font-mono font-bold">
+          open_to_opportunities=<span className="text-white">true</span>
         </span>
       </div>
 
       {/* Paragraph Card with custom border/background */}
-      <div className="p-6 rounded-[1.5rem] border border-white/[0.06] bg-[#0E0E10]/85 backdrop-blur-xl">
-        <p className="text-sm text-white/50 leading-relaxed font-medium">
+      <div className="p-6 rounded-[1.5rem] border border-slate-800/90 bg-slate-900/80 backdrop-blur-xl shadow-xl card-3d">
+        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
           Whether it&apos;s a{" "}
-          <span className="text-white font-semibold">freelance project</span>, a{" "}
-          <span className="text-white font-semibold">full-time role</span>, or just a
+          <span className="text-white font-bold">freelance project</span>, a{" "}
+          <span className="text-white font-bold">full-time role</span>, or just a
           technical conversation, my inbox is open.
         </p>
       </div>
 
       {/* Social Links with Spring-Twists */}
-      <div className="flex gap-3 mb-2">
+      <div className="flex gap-3 mb-1">
         {[
           { icon: <LinkedinIcon />, href: "https://linkedin.com/in/aftabfarhanarko", color: "hover:text-white hover:border-[#0A66C2] hover:bg-[#0A66C2]" },
           { icon: <GithubIcon />, href: "https://github.com/aftabfarhanarko", color: "hover:text-white hover:border-[#181717] hover:bg-[#181717]" },
@@ -133,7 +133,7 @@ export default function ContactInfo() {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.1, y: -2 }}
             transition={{ type: "spring", stiffness: 300, damping: 12 }}
-            className={`w-11 h-11 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-center text-white/40 transition-colors ${social.color}`}
+            className={`w-11 h-11 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-center text-slate-300 shadow-inner transition-all ${social.color}`}
           >
             {social.icon}
           </motion.a>

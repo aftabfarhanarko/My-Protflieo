@@ -34,15 +34,15 @@ export default function ToolCard({ tool, isActive, onClick, index = 0 }: ToolCar
       transition={{ duration: 0.4, delay: index * 0.05 }}
       whileHover={{ y: -4, scale: 1.01 }}
       whileTap={{ scale: 0.98 }}
-      className={`relative w-full p-5 rounded-2xl border text-left cursor-pointer flex flex-col justify-between h-44 sm:h-48 focus-visible:outline-none transition-all duration-300 ${
+      className={`relative w-full p-4 sm:p-5 rounded-2xl border text-left cursor-pointer flex flex-col justify-between h-40 sm:h-44 focus-visible:outline-none transition-all duration-300 backdrop-blur-xl card-3d ${
         isActive
-          ? "bg-[#111114]"
-          : "bg-[#0C0C0E] border-white/[0.06] hover:bg-[#101012]"
+          ? "bg-slate-900/90 shadow-2xl"
+          : "bg-slate-900/60 border-slate-800/80 hover:border-white/20 hover:bg-slate-900/80"
       }`}
       style={{
-        borderColor: isActive ? tool.color : "rgba(255, 255, 255, 0.06)",
+        borderColor: isActive ? tool.color : "rgba(255, 255, 255, 0.08)",
         boxShadow: isActive
-          ? `0 12px 24px -10px ${tool.color}33, 0 0 0 1px ${tool.color}30`
+          ? `0 16px 32px -12px ${tool.color}40, 0 0 0 1px ${tool.color}40`
           : undefined,
       }}
     >

@@ -10,7 +10,7 @@ import SubjectDropdown from "./SubjectDropdown";
 type FormState = "idle" | "submitting" | "success" | "error";
 
 const inputBase =
-  "w-full px-4 py-3.5 rounded-xl border border-border text-sm font-mono transition-all duration-200 outline-none bg-card/40 text-foreground placeholder:text-foreground/40 focus:border-foreground/25 focus:bg-card/60";
+  "w-full px-4 py-3.5 rounded-xl border border-slate-800 text-sm transition-all duration-200 outline-none bg-slate-950 text-white placeholder:text-slate-500 focus:border-white focus:ring-1 focus:ring-white/20";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -46,7 +46,7 @@ export default function ContactForm() {
 
   return (
     <motion.div variants={fadeUp} className="lg:col-span-3">
-      <div className="relative rounded-2xl border border-border bg-card/40 p-6 lg:p-8 overflow-visible">
+      <div className="relative rounded-3xl border border-slate-800/90 bg-slate-900/80 backdrop-blur-xl p-6 lg:p-8 overflow-visible shadow-2xl card-3d">
         <AnimatePresence mode="wait">
           {formState === "success" ? (
             <motion.div
@@ -55,10 +55,10 @@ export default function ContactForm() {
               animate={{ opacity: 1, scale: 1 }}
               className="flex flex-col items-center justify-center py-12 text-center gap-4"
             >
-              <div className="w-16 h-16 rounded-full border border-green-500/30 bg-green-500/10 flex items-center justify-center text-green-400">
+              <div className="w-16 h-16 rounded-full border border-emerald-500/30 bg-emerald-500/10 flex items-center justify-center text-emerald-400">
                 <Check size={28} />
               </div>
-              <p className="text-foreground font-semibold text-lg">Message sent!</p>
+              <p className="text-white font-extrabold text-lg">Message sent successfully!</p>
             </motion.div>
           ) : (
             <motion.form
@@ -70,16 +70,16 @@ export default function ContactForm() {
             >
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-[11px] font-mono text-foreground/40 uppercase tracking-widest">Full Name</label>
+                  <label className="text-[11px] font-bold font-mono text-slate-400 uppercase tracking-widest">Full Name</label>
                   <input type="text" name="name" value={formData.name} onChange={handleChange} required className={inputBase} placeholder="Aftab Farhan" />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-[11px] font-mono text-foreground/40 uppercase tracking-widest">Email</label>
+                  <label className="text-[11px] font-bold font-mono text-slate-400 uppercase tracking-widest">Email</label>
                   <input type="email" name="email" value={formData.email} onChange={handleChange} required className={inputBase} placeholder="you@example.com" />
                 </div>
               </div>
               <div className="space-y-1.5">
-                <label className="text-[11px] font-mono text-foreground/40 uppercase tracking-widest">Subject</label>
+                <label className="text-[11px] font-bold font-mono text-slate-400 uppercase tracking-widest">Subject</label>
                 <SubjectDropdown
                   dropdownOpen={dropdownOpen}
                   setDropdownOpen={setDropdownOpen}
@@ -88,17 +88,17 @@ export default function ContactForm() {
                 />
               </div>
               <div className="space-y-1.5">
-                <label className="text-[11px] font-mono text-foreground/40 uppercase tracking-widest">Message</label>
+                <label className="text-[11px] font-bold font-mono text-slate-400 uppercase tracking-widest">Message</label>
                 <textarea name="message" value={formData.message} onChange={handleChange} required rows={5} className={inputBase} placeholder="Your message..." />
               </div>
               <button
                 type="submit"
                 disabled={formState === "submitting"}
-                className="w-full py-4 rounded-xl font-black text-sm tracking-widest uppercase bg-foreground text-background hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                className="w-full py-4 rounded-xl font-extrabold text-sm tracking-widest uppercase bg-white text-black hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shadow-xl"
               >
                 {formState === "submitting" ? (
                   <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 border-2 border-background/25 border-t-background rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-black/25 border-t-black rounded-full animate-spin" />
                     Sending...
                   </div>
                 ) : (

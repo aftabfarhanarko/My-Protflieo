@@ -80,6 +80,40 @@ export const softSkills = [
       "Improved delivery speed by 40% through workflow fixes",
     ],
   },
+  {
+    id: "adaptability-growth",
+    title: "Adaptability & Speed",
+    Icon: Zap,
+    level: 93,
+    description: "Rapid technology adoption, self-driven learning, and agile execution.",
+    subSkills: [
+      { name: "Rapid Tech Stack Adoption", level: 95 },
+      { name: "Remote Autonomy & Focus", level: 92 },
+      { name: "Continuous Skill Upgrade", level: 92 },
+    ],
+    examples: [
+      "Mastered Next.js App Router and Prisma in record time",
+      "Delivered production code independently in remote setups",
+      "Adopted AI-native developer workflows for 10x output",
+    ],
+  },
+  {
+    id: "ownership-delivery",
+    title: "Project Ownership",
+    Icon: Target,
+    level: 96,
+    description: "End-to-end responsibility from initial requirements to production deployment.",
+    subSkills: [
+      { name: "Sprint & Deadline Rigor", level: 96 },
+      { name: "Production Reliability", level: 94 },
+      { name: "Stakeholder Alignment", level: 93 },
+    ],
+    examples: [
+      "Shipped 20+ production-grade web applications on schedule",
+      "Maintained zero downtime deployment records across projects",
+      "Ensured high code quality and test coverage across features",
+    ],
+  },
 ];
 
 export const coreStrengths = [

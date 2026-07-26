@@ -22,45 +22,23 @@ const Services = () => {
         </span>
       </div>
 
-      {/* ── Tech Stack Banner ───────────────────────────────────────────── */}
-      <div className="mb-12 p-6 rounded-2xl bg-foreground/5 border border-border">
-        <div className="flex items-center gap-3 mb-4">
-          <Layers size={18} className="text-foreground/60" />
-          <p className="text-sm font-semibold text-foreground/60 uppercase tracking-wider">
-            Technologies & Languages I Work With
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {techStack.map((t) => (
-            <span
-              key={t.name}
-              className={`px-3 py-1.5 text-xs font-medium border rounded-lg ${t.color}`}
-            >
-              {t.name}
-            </span>
-          ))}
-        </div>
-      </div>
-
       {/* ── DevOps / Deployment Workflow ────────────────────────────────── */}
       <DevOpsWorkflow />
 
-
-
-      {/* Also Build */}
-      <div className="p-8 rounded-2xl bg-foreground/5 border border-border mb-8">
-        <h3 className="text-lg font-bold text-foreground mb-6 flex items-center gap-3">
-          <Rocket size={18} />
-          Also Build
+      {/* Also Build / Extended Capabilities */}
+      <div className="p-6 sm:p-8 rounded-[2rem] bg-slate-900/80 border border-slate-800/90 backdrop-blur-xl mb-8 shadow-xl card-3d">
+        <h3 className="text-base sm:text-lg font-bold text-white mb-5 flex items-center gap-3">
+          <Rocket size={18} className="text-white" />
+          Extended Engineering Capabilities
         </h3>
-        <div className="grid grid-cols-2 md:flex md:flex-wrap gap-2">
+        <div className="grid grid-cols-2 md:flex md:flex-wrap gap-2.5">
           {additionalServices.map((service) => (
             <span
               key={service.label}
-              className="flex items-center gap-2 px-3 py-2 text-[10px] sm:text-sm bg-foreground/5 border border-border rounded-full text-foreground/70 hover:text-foreground hover:border-foreground/30 transition-colors cursor-default justify-center sm:justify-start"
+              className="flex items-center gap-2 px-3.5 py-2 text-xs sm:text-sm bg-slate-950/80 border border-slate-800 rounded-full text-slate-200 hover:text-white hover:border-slate-600 transition-all cursor-default justify-center sm:justify-start shadow-sm"
             >
-              <span className="opacity-60 flex-shrink-0">{service.icon}</span>
-              <span className="truncate sm:overflow-visible sm:whitespace-normal">{service.label}</span>
+              <span className="opacity-80 flex-shrink-0">{service.icon}</span>
+              <span className="truncate sm:overflow-visible sm:whitespace-normal font-semibold">{service.label}</span>
             </span>
           ))}
         </div>

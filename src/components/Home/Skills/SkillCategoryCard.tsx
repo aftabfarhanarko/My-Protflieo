@@ -82,14 +82,14 @@ export default function SkillCategoryCard({ category }: SkillCategoryCardProps) 
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="group relative flex flex-col p-6 sm:p-7 rounded-[2.25rem] border border-white/[0.06] bg-[#0E0E10]/85 backdrop-blur-xl transition-all duration-300 min-h-[380px] overflow-hidden justify-between cursor-pointer"
+      className="group relative flex flex-col p-6 sm:p-7 rounded-[2.25rem] border border-slate-800/90 bg-slate-900/80 backdrop-blur-xl transition-all duration-300 min-h-[380px] overflow-hidden justify-between cursor-pointer shadow-xl hover:border-white/30 card-3d"
     >
       {/* Moving Spotlight Gradient */}
       {spotlight.show && (
         <div
           className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
           style={{
-            background: `radial-gradient(200px circle at ${spotlight.x}px ${spotlight.y}px, ${glowColor.replace("0.15", "0.1")}, transparent 80%)`,
+            background: `radial-gradient(220px circle at ${spotlight.x}px ${spotlight.y}px, ${glowColor.replace("0.15", "0.12")}, transparent 80%)`,
           }}
         />
       )}
@@ -120,18 +120,18 @@ export default function SkillCategoryCard({ category }: SkillCategoryCardProps) 
         <motion.div 
           whileHover={{ rotate: 360, scale: 1.1 }}
           transition={{ type: "spring", stiffness: 220, damping: 12 }}
-          className="w-12 h-12 bg-white/[0.04] border border-white/[0.08] shadow-inner rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 relative overflow-hidden mb-6"
+          className="w-12 h-12 bg-white/10 border border-white/20 shadow-inner rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 relative overflow-hidden mb-6"
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-          <Icon className="w-5 h-5 text-white/95 relative z-10" strokeWidth={1.8} />
+          <Icon className="w-5 h-5 text-white relative z-10" strokeWidth={1.8} />
         </motion.div>
 
         {/* Title and Description */}
         <div className="mb-6">
-          <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mb-2.5 group-hover:text-white transition-colors">
+          <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mb-2 group-hover:text-white transition-colors">
             {category.title}
           </h3>
-          <p className="text-xs sm:text-[13px] text-white/40 leading-relaxed font-medium">
+          <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed font-medium">
             {getCategoryDescription(category.title)}
           </p>
         </div>
@@ -154,26 +154,25 @@ export default function SkillCategoryCard({ category }: SkillCategoryCardProps) 
               delay: index * 0.05
             }}
             whileHover={{ 
-              scale: 1.06,
+              scale: 1.05,
               y: -2,
-              borderColor: "rgba(255, 255, 255, 0.2)",
-              backgroundColor: "rgba(255, 255, 255, 0.06)",
+              borderColor: "rgba(255, 255, 255, 0.4)",
+              backgroundColor: "rgba(255, 255, 255, 0.08)",
             }}
-            className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-colors duration-200 group/chip cursor-default"
+            className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-2xl border border-slate-800 bg-slate-900/90 hover:bg-slate-800 transition-all duration-200 group/chip cursor-default shadow-sm"
           >
             {skill.imageUrl ? (
-              /* Enlarged solid white container for high-visibility logo */
-              <div className="w-8 h-8 rounded-xl overflow-hidden shrink-0 flex items-center justify-center bg-white p-1 shadow-[0_3px_8px_rgba(0,0,0,0.12)]">
+              <div className="w-6 h-6 rounded-lg overflow-hidden shrink-0 flex items-center justify-center bg-slate-950/80 border border-slate-800 p-0.5">
                 <img
                   src={skill.imageUrl}
                   alt={skill.name}
-                  className="w-full h-full object-contain group-hover/chip:scale-105 transition-transform duration-200"
+                  className="w-full h-full object-contain group-hover/chip:scale-110 transition-transform duration-200"
                 />
               </div>
             ) : (
-              <span className="w-2 h-2 rounded-full shrink-0 bg-white/40" />
+              <span className="w-2 h-2 rounded-full shrink-0 bg-white/60" />
             )}
-            <span className="text-[13px] sm:text-[14px] font-bold text-white/80 group-hover/chip:text-white transition-colors">
+            <span className="text-xs sm:text-sm font-bold text-slate-200 group-hover/chip:text-white transition-colors">
               {skill.name}
             </span>
           </motion.div>

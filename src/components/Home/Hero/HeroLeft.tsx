@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { HeroStat, fadeLeft, fadeUp } from "./types";
+import { Sparkles, ArrowRight, Download, Eye } from "lucide-react";
 
 interface HeroLeftProps {
   name: string;
@@ -13,90 +14,83 @@ interface HeroLeftProps {
 export default function HeroLeft({ name, title, description, stats }: HeroLeftProps) {
   return (
     <div className="flex-1 flex flex-col gap-6 z-10 max-w-2xl order-2 md:order-1 items-center md:items-start">
-      {/* Greeting */}
-      <motion.p
-        {...fadeLeft(0.1)}
-        className="text-center md:text-left text-lg font-medium text-foreground/50 tracking-wide"
-      >
-        Hi, I&apos;m{" "}
-        <span className="text-foreground font-bold">{name}</span>
-      </motion.p>
+      
+      {/* Availability Status Pill */}
+      <motion.div {...fadeLeft(0.08)}>
+        <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/10 border border-white/20 text-white shadow-sm backdrop-blur-md">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span>Available for Hire & Key Projects</span>
+        </span>
+      </motion.div>
 
-      <motion.div {...fadeLeft(0.18)} className="text-center md:text-left">
-        <h1 className="text-2xl md:text-4xl">
-          <span className="block text-foreground">{title}</span>
+      {/* Greeting & Name */}
+      <motion.div {...fadeLeft(0.14)} className="text-center md:text-left space-y-1">
+        <p className="text-sm sm:text-base font-semibold text-slate-300 tracking-wide uppercase">
+          Hello, I&apos;m <span className="text-white font-black">{name || "Aftab Farhan Arko"}</span>
+        </p>
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+          {title || "Full-Stack Software Engineer"}
         </h1>
       </motion.div>
 
-      {/* Description */}
+      {/* Bio / Description */}
       <motion.p
-        {...fadeLeft(0.34)}
-        className="text-lg text-foreground/95 text-wrap max-w-lg leading-[1.85] text-center md:text-left"
+        {...fadeLeft(0.24)}
+        className="text-sm sm:text-base text-slate-200 leading-relaxed text-center md:text-left max-w-xl font-medium"
       >
-        {description}
+        {description || "Passionate Full-Stack Developer specialized in building modern, scalable web applications with React, Next.js, TypeScript, and Node.js."}
       </motion.p>
 
-      {/* CTA buttons */}
-      <motion.div {...fadeUp(0.5)} className="flex flex-wrap justify-center md:justify-start gap-4 mt-1 w-full md:w-auto">
+      {/* CTA Buttons */}
+      <motion.div {...fadeUp(0.35)} className="flex flex-wrap justify-center md:justify-start gap-4 mt-2 w-full md:w-auto">
         <motion.a
           href="#contact"
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.96 }}
-          className="group flex items-center justify-center gap-2.5 rounded-xl bg-foreground px-7 py-3.5 text-sm font-black text-background hover:bg-foreground/90 transition-colors w-full sm:w-auto"
+          whileHover={{ scale: 1.03, y: -2 }}
+          whileTap={{ scale: 0.97 }}
+          className="inline-flex items-center justify-center gap-2.5 rounded-2xl bg-white hover:bg-slate-100 px-7 py-3.5 text-sm font-black text-black shadow-lg shadow-white/10 hover:shadow-white/20 transition-all cursor-pointer w-full sm:w-auto"
         >
-          <svg
-            xmlns=""
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="group-hover:translate-y-0.5 transition-transform duration-200"
-          >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="7 10 12 15 17 10" />
-            <line x1="12" x2="12" y1="15" y2="3" />
-          </svg>
+          <Download size={16} />
           Download Resume
         </motion.a>
+
         <motion.a
-          href="#project"
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.96 }}
-          className="flex items-center justify-center rounded-xl border border-foreground/40 px-7 py-3.5 text-sm font-black text-foreground/80 hover:bg-foreground/8 hover:border-foreground hover:text-foreground transition-all w-full sm:w-auto text-center"
+          href="#projects"
+          whileHover={{ scale: 1.03, y: -2 }}
+          whileTap={{ scale: 0.97 }}
+          className="inline-flex items-center justify-center gap-2.5 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 px-7 py-3.5 text-sm font-bold text-slate-200 hover:text-white transition-all cursor-pointer backdrop-blur-md w-full sm:w-auto"
         >
+          <Eye size={16} />
           View Projects
         </motion.a>
       </motion.div>
 
-      <motion.div
-        {...fadeUp(0.6)}
-        className="flex flex-wrap gap-6 sm:gap-12 pt-8 mt-3 border-t border-border w-full justify-center md:justify-start"
-      >
-        {stats.map(({ id, value, label }, i) => (
-          <motion.div
-            key={id}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.6,
-              delay: 0.65 + i * 0.08,
-              ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-            }}
-            className="group cursor-default text-center md:text-left"
-          >
-            <div className="text-3xl font-black text-foreground tracking-tighter group-hover:text-foreground transition-colors duration-300">
-              {value}
-            </div>
-            <div className="text-[10px] font-black uppercase tracking-[0.10em] mt-1.5">
-              {label}
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
+      {/* Stats Bar */}
+      {stats && stats.length > 0 && (
+        <motion.div
+          {...fadeUp(0.45)}
+          className="flex flex-wrap gap-8 sm:gap-12 pt-6 mt-4 border-t border-slate-800/80 w-full justify-center md:justify-start"
+        >
+          {stats.map(({ id, value, label }, i) => (
+            <motion.div
+              key={id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.5,
+                delay: 0.5 + i * 0.08,
+              }}
+              className="group cursor-default text-center md:text-left"
+            >
+              <div className="text-2xl sm:text-3xl font-black text-white tracking-tight group-hover:text-slate-300 transition-colors duration-300">
+                {value}
+              </div>
+              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-1">
+                {label}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      )}
     </div>
   );
 }

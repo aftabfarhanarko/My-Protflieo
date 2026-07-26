@@ -43,7 +43,7 @@ const LinkedinIcon = ({ size = 18, ...props }: React.ComponentProps<"svg"> & { s
     fill="currentColor"
     {...props}
   >
-    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 11 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
   </svg>
 );
 
@@ -87,12 +87,6 @@ const socialLinks = [
     icon: GithubIcon,
     href: "https://github.com/aftabfarhanarko",
   },
-  {
-    label: "LinkedIn",
-    icon: LinkedinIcon,
-    href: "https://linkedin.com/in/aftabfarhanarko",
-  },
-  // লগইন আলাদাভাবে রেন্ডার হবে, এখানে রাখার দরকার নেই (তবে রাখলেও ক্ষতি নেই)
 ];
 
 export default function Navbar() {
@@ -341,60 +335,44 @@ export default function Navbar() {
             })}
 
             {/* 🟢 ছোট লগইন আইকন */}
-            <Link href="/login" passHref legacyBehavior>
-              <motion.a
-                className="flex items-center justify-center rounded-full border-none cursor-pointer"
-                style={{
-                  width: 30,          // ছোট
-                  height: 30,
-                  backgroundColor: p.accent,   // সবুজ ব্যাকগ্রাউন্ড
-                  color: "#ffffff",
-                  border: `1px solid ${p.border}`,
-                }}
-                whileHover={{
-                  scale: 1.1,
-                  backgroundColor: "#16a34a", // গাঢ় সবুজ
-                  color: "#ffffff",
-                }}
-                whileTap={{ scale: 0.9 }}
-                aria-label="Login"
-              >
-                <LogInIcon size={16} />
-              </motion.a>
-            </Link>
-
-            {/* থিম টগল */}
-            <motion.button
-              onClick={toggleTheme}
-              className="flex items-center justify-center rounded-full border-none cursor-pointer"
+            <Link
+              href="/login"
+              className="flex items-center justify-center rounded-full border-none cursor-pointer transition-transform hover:scale-110 active:scale-95 hover:bg-[#16a34a]"
               style={{
-                width: 38,
-                height: 38,
-                backgroundColor: p.activeBg,
-                color: p.text,
+                width: 30,          // ছোট
+                height: 30,
+                backgroundColor: p.accent,   // সবুজ ব্যাকগ্রাউন্ড
+                color: "#ffffff",
                 border: `1px solid ${p.border}`,
               }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label="Toggle theme"
+              aria-label="Login"
             >
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={isDark ? "moon" : "sun"}
-                  initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
-                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                  exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
-                  transition={{ duration: 0.2 }}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {isDark ? <Moon size={16} /> : <Sun size={16} />}
-                </motion.span>
-              </AnimatePresence>
-            </motion.button>
+              <LogInIcon size={16} />
+            </Link>
+
+            {/* 🔵 লিঙ্কডইন আইকন */}
+            <motion.a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center rounded-full border-none cursor-pointer"
+              style={{
+                width: 30,
+                height: 30,
+                backgroundColor: "#0A66C2",
+                color: "#ffffff",
+                border: `1px solid ${p.border}`,
+              }}
+              whileHover={{
+                scale: 1.1,
+                backgroundColor: "#004182",
+                color: "#ffffff",
+              }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="LinkedIn"
+            >
+              <LinkedinIcon size={15} />
+            </motion.a>
           </div>
         </nav>
       </motion.header>

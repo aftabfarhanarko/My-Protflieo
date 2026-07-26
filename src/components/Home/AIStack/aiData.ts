@@ -4,7 +4,7 @@ export const AI_TOOLS = [
     name: "Google Antigravity",
     shortName: "Antigravity",
     type: "Agentic Coding Assistant",
-    description: "DeepMind's advanced agentic programmer. My primary partner for codebase-wide editing, automated refactoring, API integration, and production-grade validation. Its multi-file reasoning is incredibly reliable for complex modifications.",
+    description: "DeepMind's agentic framework for codebase refactoring, multi-file edits, and automated build validation.",
     color: "#4285F4", // Google Blue
     accentColor: "from-blue-600 to-indigo-600",
     usage: 95,
@@ -16,11 +16,11 @@ export const AI_TOOLS = [
     name: "Cursor AI",
     shortName: "Cursor",
     type: "AI-First Code Editor",
-    description: "My go-to editor for daily development. Inline autocomplete (Copilot++), codebase semantic indexing, and chat-assisted edits allow me to write code at maximum velocity.",
+    description: "Inline autocomplete (Copilot++), codebase semantic indexing, and high-speed feature creation.",
     color: "#00E5FF", // Neon Cyan
     accentColor: "from-cyan-500 to-blue-500",
     usage: 98,
-    role: "Inline Completion & Codebase Editing",
+    role: "Inline Completion & Code Editing",
     logoUrl: "/cursor-app-icon.png"
   },
   {
@@ -28,11 +28,11 @@ export const AI_TOOLS = [
     name: "DeepSeek AI",
     shortName: "DeepSeek",
     type: "Reasoning & Mathematical LLM",
-    description: "A highly intelligent mathematical and coding model. Chosen for writing deep backend algorithms, microservice query planning, and complex database structures.",
+    description: "Advanced reasoning model for designing complex algorithms, SQL schemas, and microservice architectures.",
     color: "#0066FF", // Blue
     accentColor: "from-blue-500 to-sky-400",
     usage: 92,
-    role: "Complex Algorithm Design & SQL Optimization",
+    role: "Algorithm Design & Query Optimization",
     logoUrl: "/deepseek-logo-icon.png"
   },
   {
@@ -40,11 +40,11 @@ export const AI_TOOLS = [
     name: "Grok AI",
     shortName: "Grok",
     type: "Real-time Logic Assistant",
-    description: "xAI's fast reasoning model. Outstanding at tracing complex errors, analyzing system logs, and brainstorming developer architectural paths.",
+    description: "Fast reasoning engine for log analysis, environment auditing, and trace debugging.",
     color: "#EFEFEF", // White/Slate
     accentColor: "from-slate-700 to-slate-900",
     usage: 90,
-    role: "Trace Debugging & Architectural Feedback",
+    role: "Trace Debugging & System Auditing",
     logoUrl: "/grok.png"
   },
   {
@@ -52,11 +52,11 @@ export const AI_TOOLS = [
     name: "ByteDance Trae",
     shortName: "Trae",
     type: "Adaptive Development IDE",
-    description: "Highly fluid IDE for navigating large, nested Next.js and React workspaces. Its compiler-level code suggestions are extremely responsive and comfortable to work with.",
+    description: "Fluid workspace navigation for Next.js app routes, component trees, and build compilation.",
     color: "#FF3366", // Neon Rose/Red
     accentColor: "from-rose-500 to-orange-500",
     usage: 88,
-    role: "Multi-file Navigation & Error Tracing",
+    role: "Multi-file Navigation & Build Checks",
     logoUrl: "/trae.jpg"
   },
   {
@@ -64,11 +64,11 @@ export const AI_TOOLS = [
     name: "Windsurf IDE",
     shortName: "Windsurf",
     type: "Agentic Flow Workspace",
-    description: "Codeium's agentic workspace. Extremely convenient for setting up initial boilerplates, installing package systems, and running dev-server checks completely autonomously.",
+    description: "Autopiloted scaffolding for initializing project boilerplates and package dependency configurations.",
     color: "#8B5CF6", // Purple / Violet
     accentColor: "from-purple-500 to-indigo-600",
     usage: 85,
-    role: "Autopiloted Scaffolding & Rapid Boilerplate",
+    role: "Autopiloted Scaffolding & Setup",
     logoUrl: "/Windsurf.png"
   }
 ];
